@@ -61,7 +61,7 @@ class NetworkServer:
             print(f"Received TCP request for {file_size} bytes.")
             bytes_sent = 0
             while bytes_sent < file_size:
-                chunk = b"x" * min(BUFFER_SIZE, file_size - bytes_sent)
+                chunk = b"x" * 1
                 client_socket.sendall(chunk)
                 bytes_sent += len(chunk)
                 print(f"TCP transfer: Sent {bytes_sent}/{file_size} bytes.")
@@ -92,7 +92,7 @@ class NetworkServer:
         total_segments = math.ceil(file_size / BUFFER_SIZE)
         print(f"Starting UDP transfer to {client_address}, total segments: {total_segments}")
         for segment in range(total_segments):
-            payload = b"x" * min(BUFFER_SIZE, file_size - segment * BUFFER_SIZE)
+            payload = b"x" * 1
             packet = encode_payload_packet(total_segments, segment + 1) + payload
             self.udp_socket.sendto(packet, client_address)
             print(f"Sent UDP segment {segment + 1}/{total_segments} to {client_address}")
